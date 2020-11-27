@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "Generate tocken",
+			"name": "Generate tocken check check",
 			"event": [
 				{
 					"listen": "test",
