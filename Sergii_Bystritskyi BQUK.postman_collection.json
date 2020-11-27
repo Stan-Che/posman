@@ -1,0 +1,2787 @@
+{
+	"info": {
+		"_postman_id": "7a1a49e0-07d7-4c12-a03c-36d37999cc6b",
+		"name": "Sergii_Bystritskyi BQUK",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Generate tocken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a3ff9a6-06ff-4f43-9ec8-f19a97f65636",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"accessToken\", jsonDataResponse.accessToken);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"ANON\",\n  \"password\": \"ANON\"\n}\n"
+				},
+				"url": {
+					"raw": "{{apiEnvDirect}}1/auth/BQUK",
+					"host": [
+						"{{apiEnvDirect}}1"
+					],
+					"path": [
+						"auth",
+						"BQUK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate tocken internal customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7726c17d-d535-444b-975a-fe559c2c3fd7",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"accessToken\", jsonDataResponse.accessToken);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://atg-all-aws-mockexternalkeysprovider01.aws.gha.kfplc.com:8080/mockprovider-1.0/mock/token?upn={{upn}}",
+					"protocol": "http",
+					"host": [
+						"atg-all-aws-mockexternalkeysprovider01",
+						"aws",
+						"gha",
+						"kfplc",
+						"com"
+					],
+					"port": "8080",
+					"path": [
+						"mockprovider-1.0",
+						"mock",
+						"token"
+					],
+					"query": [
+						{
+							"key": "upn",
+							"value": "{{upn}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inject Sales Order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\":{\r\n      \"type\":\"thirdPartyOrderRequestObject\",\r\n      \"attributes\":{\r\n         \"channel\":\"Web\",\r\n         \"originatingStore\":\"1863\",\r\n         \"salesOrderId\":\"13215808\",\r\n         \"customerId\":\"25240026\",\r\n         \"lineItems\":[\r\n            {\r\n               \"data\":{\r\n                  \"type\":\"thirdPartyLineItem\",\r\n                  \"attributes\":{\r\n                     \"ean\":\"5012701004077\",\r\n                     \"lineItemType\":\"0\",\r\n                     \"lineQty\":\"1\",\r\n                     \"originalPrice\":{\r\n                        \"amount\":\"131.69\",\r\n                        \"currencyCode\":\"GBP\"\r\n                     },\r\n                     \"unitPrice\":{\r\n                        \"amount\":\"69.131\",\r\n                        \"currencyCode\":\"GBP\"\r\n                     },\r\n                     \"netPrice\":{\r\n                        \"amount\":\"148.50\",\r\n                        \"currencyCode\":\"GBP\"\r\n                     },\r\n                     \"extendedPrice\":{\r\n                        \"amount\":\"120.0\",\r\n                        \"currencyCode\":\"GBP\"\r\n                     },\r\n                     \"taxCode\":\"Full_Rate\",\r\n                     \"taxAmount\":{\r\n                        \"amount\":\"30.0\",\r\n                        \"currencyCode\":\"GBP\"\r\n                     },\r\n                     \"lineTypeIndicators\":[\r\n                        \"voids\"\r\n                     ]\r\n                  }\r\n               }\r\n            }\r\n         ],\r\n         \"paymentGroups\":[\r\n            {\r\n               \"data\":{\r\n                  \"type\":\"thirdPartyPaymentGroup\",\r\n                  \"attributes\":{\r\n                     \"value\":{\r\n                        \"amount\":\"20.00\",\r\n                        \"currencyCode\":\"GBP\"\r\n                     },\r\n                     \"paymentSource\":\"EPoS\",\r\n                     \"paymentMethod\":\"GIFT_CARD\",\r\n                     \"giftCardPayment\":{\r\n                        \"type\":\"giftCardDetails\",\r\n                        \"id\":\"8844841315\",\r\n                        \"attributes\":{\r\n                           \"cardNumber\":\"12354678\",\r\n                           \"pin\":\"1110\"\r\n                        }\r\n                     }\r\n                  }\r\n               }\r\n            },\r\n            {\r\n               \"data\":{\r\n                  \"type\":\"thirdPartyPaymentGroup\",\r\n                  \"attributes\":{\r\n                     \"value\":{\r\n                        \"amount\":\"100.00\",\r\n                        \"currencyCode\":\"GBP\"\r\n                     },\r\n                     \"paymentSource\":\"EPoS\",\r\n                     \"paymentMethod\":\"CARD\",\r\n                     \"cardPayment\":{\r\n                        \"amountAuthorised\":{\r\n                           \"amount\":\"100.00\",\r\n                           \"currencyCode\":\"GBP\"\r\n                        },\r\n                        \"cardPayment\":{\r\n                           \"type\":\"paymentCard\",\r\n                           \"id\":\"pg19310017\",\r\n                           \"attributes\":{\r\n                              \"cardType\":\"VISA\",\r\n                              \"number\":\"4485980011112217\",\r\n                              \"name\":\"Chuck Norris\",\r\n                              \"expiryMonth\":\"12\",\r\n                              \"expiryYear\":\"2021\",\r\n                              \"billingAddress\":{\r\n                                 \"type\":\"contactInfo\",\r\n                                 \"id\":\"pg19310017\",\r\n                                 \"attributes\":{\r\n                                    \"addressId\":\"pg19310017\",\r\n                                    \"contactDetails\":{\r\n                                       \"meta\":{\r\n\r\n                                       },\r\n                                       \"data\":{\r\n                                          \"attributes\":{\r\n                                             \"honorificPrefix\":\"Mr\",\r\n                                             \"givenName\":\"Chuck\",\r\n                                             \"familyName\":\"Norris\",\r\n                                             \"companyName\":\"Epam\",\r\n                                             \"phoneNumber\":\"+4400000000\",\r\n                                             \"mobileNumber\":\"07123123123\",\r\n                                             \"rawAddress\":{\r\n                                                \"houseName\":\"Fizkultury\",\r\n                                                \"houseNumber\":\"28\",\r\n                                                \"addressLine1\":\"someAddressLine1\",\r\n                                                \"addressLine2\":\"SomeAddressLine2\",\r\n                                                \"city\":\"Kyiv\",\r\n                                                \"county\":\"Ua\",\r\n                                                \"country\":\"GB\",\r\n                                                \"postalCode\":\"CM0 7AA\"\r\n                                             }\r\n                                          }\r\n                                       }\r\n                                    }\r\n                                 }\r\n                              },\r\n                              \"token\":\"10055932901\",\r\n                              \"mkCardSchemeId\":2\r\n                           }\r\n                        }\r\n                     }\r\n                  }\r\n               }\r\n            }\r\n         ],\r\n         \"totals\":{\r\n            \"type\":\"totals\",\r\n            \"attributes\":{\r\n               \"totalValue\":{\r\n                  \"amount\":\"120.00\",\r\n                  \"currencyCode\":\"GBP\"\r\n               },\r\n               \"subTotalGrossValue\":{\r\n                  \"amount\":\"120.00\",\r\n                  \"currencyCode\":\"GBP\"\r\n               },\r\n               \"totalDeliveryCharge\":{\r\n                  \"amount\":\"10.00\",\r\n                  \"currencyCode\":\"GBP\"\r\n               },\r\n               \"standardDeliveryCharge\":{\r\n                  \"amount\":\"0.00\",\r\n                  \"currencyCode\":\"GBP\"\r\n               },\r\n               \"payOnDeliveryServiceCharge\":{\r\n                  \"amount\":\"0.00\",\r\n                  \"currencyCode\":\"GBP\"\r\n               },\r\n               \"premiumDeliveryCharge\":{\r\n                  \"amount\":\"0.0\",\r\n                  \"currencyCode\":\"GBP\"\r\n               },\r\n               \"deliverySurcharge\":{\r\n                  \"amount\":\"0.0\",\r\n                  \"currencyCode\":\"GBP\"\r\n               },\r\n               \"deliveryGrouping\":\"OneMan\",\r\n               \"totalTaxValue\":{\r\n                  \"amount\":\"30.0\",\r\n                  \"currencyCode\":\"GBP\"\r\n               }\r\n            }\r\n         }\r\n      }\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/salesorder/BQUK/3rdPartyOrders",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"salesorder",
+						"BQUK",
+						"3rdPartyOrders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate token Akana",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aa31eed1-92b2-4515-a945-3662209c3b38",
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"accessToken\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "Authorization",
+						"value": "Atmosphere atmosphere_app_id=\"ydkihoax-5IlGwqLpXvN3tq96l1HJY37n\""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "ydkihoax-5IlGwqLpXvN3tq96l1HJY37n",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "0cbdcae7dd2e0886f1bf8ca1da3b7f27aa9ec3f4",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "aubqukci-BQUK/ANON",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "ANON",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://kingfisher-dev.apiportal-eu.akana.com/oauth/oauth20/token",
+					"protocol": "https",
+					"host": [
+						"kingfisher-dev",
+						"apiportal-eu",
+						"akana",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"oauth20",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customerResources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"customerID\", jsonDataResponse.data.attributes.profileId);\r",
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"basketID\", jsonDataResponse.data.attributes.basketId);\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/customerResources",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"customerResources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer Orders",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9af79290-5357-4992-9640-4a351657d8d0",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/{{customerID}}/orders",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/vnd.api+json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\":{\r\n    \"type\":\"customerCreate\",\r\n    \"attributes\":{\r\n      \"email\":\"1{{$timestamp}}reg@test.ua\",\r\n      \"password\":\"Password1\",\r\n      \"honorificPrefix\":\"Miss\",\r\n      \"givenName\":\"ŴǄǼéßËÄÜSom,FirstName\",\r\n      \"familyName\":\"ŴǄǼéßËÄÜSom,FamilyName\",\r\n      \"companyName\":\"ŴǄǼéßËÄÜ12-.,'SomeCompany\",\r\n      \"phoneNumber\":\"+123 123 123\",\r\n      \"mobileNumber\":\"07555555555\",\r\n      \"dateOfBirth\":\"1956-09-23\", \r\n      \"marketingChannels\": [\r\n                {\r\n                    \"channel\": \"sms\",\r\n                    \"privacyPolicyVersionId\": \"1\",\r\n                    \"optIn\": \"true\",\r\n                    \"submitted\": \"2018-01-10T12:00:00+03:00\",\r\n                    \"marketingChannelVersionId\": \"2\"\r\n                }\r\n            ]\r\n      }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Uninitialized Customer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"data\": {\r\n  \"type\": \"customerCreate\",\r\n  \"attributes\": {\r\n   \"email\": \"test{{$timestamp}}@gmail.com\",\r\n   \"phoneNumber\": \"0033912345678\",\r\n   \"honorificPrefix\": \"Mr\",\r\n   \"givenName\": \"First\",\r\n   \"familyName\": \"Second\",\r\n   \"companyName\": \"Epam\",\r\n   \"mobileNumber\": \"07123123123\",\r\n   \"dateOfBirth\": \"1956-09-23\",\r\n\r\n   \"marketingChannels\": [\r\n                {\r\n                    \"channel\": \"sms\",\r\n                    \"privacyPolicyVersionId\": \"1\",\r\n                    \"optIn\": \"true\",\r\n                    \"submitted\": \"2018-01-10T12:00:00+03:00\",\r\n                    \"marketingChannelVersionId\": \"2\"\r\n                }\r\n            ]\r\n  }\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/uninitialized",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"uninitialized"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETCustomer",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/{{customerID}}",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"{{customerID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ResetPassword",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n    \"data\": {\r\n        \"type\": \"customerPasswordUpdateInfo\",\r\n        \"attributes\": {\r\n            \"oldPassword\": \"dave123456\",\r\n            \"newPassword\": \"dave1234567\"\r\n        }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/resetPassword",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"resetPassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETCustomers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnvDirect}}2/customers/BQUK/?page[number]=1&page[size]=10&filter[profileId]=_a",
+					"host": [
+						"{{apiEnvDirect}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						""
+					],
+					"query": [
+						{
+							"key": "page[number]",
+							"value": "1"
+						},
+						{
+							"key": "page[size]",
+							"value": "10"
+						},
+						{
+							"key": "filter[givenName]",
+							"value": "Ségolène",
+							"disabled": true
+						},
+						{
+							"key": "allBrands",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "filter[profileId]",
+							"value": "_a"
+						},
+						{
+							"key": "filter[familyName]",
+							"value": "Ségolène",
+							"disabled": true
+						},
+						{
+							"key": "filter[companyName]",
+							"value": "KITS",
+							"disabled": true
+						},
+						{
+							"key": "filter[customerNumber]",
+							"value": "0060000100",
+							"disabled": true
+						},
+						{
+							"key": "filter[email]",
+							"value": "BQ_496884522",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETCustomers Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/?filter[customerExternalId]=0067974036",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						""
+					],
+					"query": [
+						{
+							"key": "filter[customerExternalId]",
+							"value": "0067974036"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHCustomer",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n              \"data\": {\r\n                  \"id\": \"{{customerID}}\",\r\n                  \"type\": \"customerUpdate\",\r\n                  \"attributes\": {\r\n                      \"givenName\": \"C\",\r\n                      \"companyName\": \"E\",\r\n                      \"familyName\": \"N\",\r\n                      \"honorificPrefix\": \"Mr\",\r\n                      \"mobileNumber\": \"07123123123\",\r\n                      \"phoneNumber\": \"123456789\",\r\n                      \"homeAddress\": {\r\n                          \"houseName\": \"F\",\r\n                          \"houseNumber\": \"1\",\r\n                          \"addressLine1\": \"s\",\r\n                          \"addressLine2\": \"s\",\r\n                          \"city\": \"K\",\r\n                          \"county\": \"U\",\r\n                          \"country\": \"GB\",\r\n                          \"postalCode\": \"CM0 7AA\"\r\n                      },\r\n                      \"marketingChannels\": [\r\n                      {\r\n                    \"channel\": \"phone\",\r\n                    \"privacyPolicyVersionId\": \"1\",\r\n                    \"optIn\": \"true\",\r\n                    \"submitted\": \"2018-01-10T12:00:00+03:00\",\r\n                    \"marketingChannelVersionId\": \"2\"\r\n                }\r\n\r\n                      ]\r\n                  }\r\n              }\r\n          }"
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/{{customerID}}",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"{{customerID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBasket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"basketID\", jsonDataResponse.data.id);\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"data\": {\r\n   \"type\": \"basket\",\r\n   \"attributes\": {\r\n    \"channel\": \"Web\",\r\n    \"originatingStore\" : \"0683\",\r\n    \"customerId\": \"{{customerID}}\"\r\n   }\r\n  }\r\n }\r\n \r\n "
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTLineItemToBasket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"commerceItem1\", jsonDataResponse.data.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"data\": {\r\n   \"type\": \"lineItem\",\r\n   \"attributes\": {\r\n     \"ean\": \"3165140596367\",\r\n     \"lineItemCommonElements\": {\r\n        \"shippingMethodType\" : \"HomeDelivery\",\r\n        \"lineItemType\": \"sale\",\r\n        \"lineQty\": \"1\"\r\n    }\r\n   }\r\n  }\r\n }"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK/{{basketID}}/lines",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"lines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTBatchLineItemsToBasket",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7838b9b6-7699-4e59-a7c6-77612eea382b",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"commerceItem1\", jsonDataResponse.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": [\r\n        {\r\n            \"data\": {\r\n                \"type\": \"lineItem\",\r\n                \"attributes\": {\r\n                    \"ean\": \"3165140839877\",\r\n                    \"lineItemCommonElements\": {\r\n                        \"shippingMethodType\": \"HomeDelivery\",\r\n                        \"lineItemType\": \"sale\",\r\n                        \"lineQty\": \"1\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n         {\r\n            \"data\": {\r\n                \"type\": \"lineItem\",\r\n                \"attributes\": {\r\n                    \"ean\": \"4892210129093\",\r\n                    \"lineItemCommonElements\": {\r\n                        \"shippingMethodType\": \"HomeDelivery\",\r\n                        \"lineItemType\": \"sale\",\r\n                        \"lineQty\": \"1\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"data\": {\r\n                \"type\": \"lineItem\",\r\n                \"attributes\": {\r\n                    \"ean\": \"3165140596367\",\r\n                    \"lineItemCommonElements\": {\r\n                        \"shippingMethodType\": \"HomeDelivery\",\r\n                        \"lineItemType\": \"sale\",\r\n                        \"lineQty\": \"1\"\r\n                    }\r\n                }\r\n            }\r\n        },\r\n        {\r\n            \"data\": {\r\n                \"type\": \"lineItem\",\r\n                \"attributes\": {\r\n                    \"ean\": \"0088381646239\",\r\n                    \"lineItemCommonElements\": {\r\n                        \"shippingMethodType\": \"HomeDelivery\",\r\n                        \"lineItemType\": \"sale\",\r\n                        \"lineQty\": \"1\"\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK/{{basketID}}/relationships/batch/lines",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"relationships",
+						"batch",
+						"lines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PatchPrefferedStore",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"data\" : {\r\n  \"id\": \"0216\",\r\n  \"type\":\"store\"\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK/{{basketID}}/relationships/store",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"relationships",
+						"store"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Basket Line",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"lineItem\",\r\n  \"id\": \"{{commerceItem1}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK/{{basketID}}/relationships/lines",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"relationships",
+						"lines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETPromotions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/promotions/BQUK?filter[ean]=5052931394340,03134023,03825761,5052931325153,5030349011790,5030349011875,5030349011844,5030349010403,5030349010427,5397007172072,5397007125825,5015772184990,5015772184938,5015772184952,5015772184969,5015772184983,5015772184914,5015772184907,5015772184921,5015772184884,5015772185034,5015772185096,5015772185065,5015772191110,5015772191127,5015772184976,5015772184891,5015772191059,5015772191042,5015341021657,5015772184853,5015772184860,5015772190960,5015772190038,5015772184877,5015772184846,5015772190519,5015772191073,5015772285352,5015772184945,5018801007963,5022652841188,5022652841195,5015341060687,5015341060717,5055149902253,5055149902253,5055149902239,5055149902482,5055149902246",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"promotions",
+						"BQUK"
+					],
+					"query": [
+						{
+							"key": "filter[ean]",
+							"value": "5052931394340,03134023,03825761,5052931325153,5030349011790,5030349011875,5030349011844,5030349010403,5030349010427,5397007172072,5397007125825,5015772184990,5015772184938,5015772184952,5015772184969,5015772184983,5015772184914,5015772184907,5015772184921,5015772184884,5015772185034,5015772185096,5015772185065,5015772191110,5015772191127,5015772184976,5015772184891,5015772191059,5015772191042,5015341021657,5015772184853,5015772184860,5015772190960,5015772190038,5015772184877,5015772184846,5015772190519,5015772191073,5015772285352,5015772184945,5018801007963,5022652841188,5022652841195,5015341060687,5015341060717,5055149902253,5055149902253,5055149902239,5055149902482,5055149902246"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTPromotion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  \r\n{\r\n    \"data\" : {\r\n    \"type\" : \"createPromotion\",\r\n    \"attributes\": {\r\n      \"promoCodeOrNumber\": \"dclm4fc050\",\r\n      \"promoType\" : \"Voucher\",\r\n      \"cardData\" : {\r\n     \"type\" : \"discountCardDetails\",\r\n     \"attributes\" : {\r\n      \"nameOnCard\" : \"\",\r\n      \"expiryMonth\" : \"\",\r\n      \"expiryYear\" : \"\"\r\n     }\r\n}\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK/{{basketID}}/promotions",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"promotions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETEPromotion",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  \r\n{\r\n    \"data\" : {\r\n    \"type\" : \"createPromotion\",\r\n    \"attributes\": {\r\n      \"promoCodeOrNumber\": \"couponpromotest1930002\",\r\n      \"promoType\" : \"Voucher\"\r\n}\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK/{{basketID}}/relationships/promotions",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"relationships",
+						"promotions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHBasketLine",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n \"data\": {\r\n  \"id\": \"{{commerceItem1}}\",\r\n  \"type\": \"lineItemUpdate\",\r\n  \"attributes\": {\r\n   \"lineItemCommonElements\": {\r\n    \"shippingMethodType\": \"ClickCollect\",\r\n            \"lineQty\": \"4\"\r\n    }\r\n  }\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/baskets/BQUK/{{basketID}}/lines/{{commerceItem1}}?include=basket.lines",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"lines",
+						"{{commerceItem1}}"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "basket.lines"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH Batch BasketLine",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n \"data\": {\r\n  \"id\": \"{{commerceItem1}}\",\r\n  \"type\": \"lineItemUpdate\",\r\n  \"attributes\": {\r\n   \"lineItemCommonElements\": {\r\n    \"shippingMethodType\": \"ClickCollect\",\r\n            \"lineQty\": \"4\"\r\n    }\r\n  }\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/baskets/BQUK/{{basketID}}/lines/{{commerceItem1}}?include=basket.lines",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"lines",
+						"{{commerceItem1}}"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "basket.lines"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTBQcard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\" : {\r\n    \"type\" : \"createPromotion\",\r\n    \"attributes\": {\r\n      \"promoCodeOrNumber\": \"1111111111111112\",\r\n      \"promoType\" : \"ClubCard\",\r\n      \"cardData\" : {\r\n     \"type\" : \"discountCardDetails\",\r\n     \"attributes\" : {\r\n      \"nameOnCard\" : \"\",\r\n      \"expiryMonth\" : \"\",\r\n      \"expiryYear\" : \"\"\r\n     }\r\n}\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK/{{basketID}}/promotions",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"promotions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETEBQCard",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  \r\n{\r\n    \"data\" : {\r\n    \"type\" : \"createPromotion\",\r\n    \"attributes\": {\r\n      \"promoCodeOrNumber\": \"6356669500000001\",\r\n      \"promoType\" : \"ClubCard\"\r\n}\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/baskets/BQUK/{{basketID}}/relationships/promotions",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"relationships",
+						"promotions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETBasket",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}1/baskets/BQUK/{{basketID}}",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"baskets",
+						"BQUK",
+						"{{basketID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTDiscountCard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\" : {\r\n    \"type\" : \"createPromotion\",\r\n    \"attributes\": {\r\n      \"promoCodeOrNumber\": \"1111111100000000\",\r\n      \"promoType\" : \"Discount\",\r\n      \"cardData\" : {\r\n     \"type\" : \"discountCardDetails\",\r\n     \"attributes\" : {\r\n      \"nameOnCard\" : \"Discount card 15% order promo\",\r\n      \"expiryMonth\" : \"09\",\r\n      \"expiryYear\" : \"2040\"\r\n     }\r\n}\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/baskets/BQUK/{{basketID}}/promotions",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"promotions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConervtToGuest",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1ef290a-f337-494d-a5eb-7a8ae306315d",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable (\"email\", jsonDataResponse.data.attributes.email);",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"data\":{\r\n    \"type\":\"guestCustomerCreate\",\r\n    \"attributes\": {\r\n      \"email\":\"sb_1{{$timestamp}}@test.ua\",\r\n      \"marketingChannels\": [\r\n        {\r\n          \"channel\": \"sms\",\r\n          \"privacyPolicyVersionId\": \"1\",\r\n          \"marketingChannelVersionId\": \"1\",\r\n          \"optIn\": true,\r\n          \"submitted\": \"2018-01-10T09:00:00Z\"\r\n        }\r\n      ]\r\n    }\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/anon/conversion/guest?include=marketingConsent",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"anon",
+						"conversion",
+						"guest"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "marketingConsent"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConervtToRegistered",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\":{\r\n      \"type\": \"guestConvertRegistered\",\r\n      \"id\":\"{{customerID}}\",\r\n      \"attributes\":{\r\n         \"email\":\"sb_11549547065@test.ua\",\r\n         \"password\":\"Password\"\r\n      }\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/guest/conversion/registered",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"guest",
+						"conversion",
+						"registered"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Activation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\":{\r\n      \"type\": \"guestConvertRegistered\",\r\n      \"id\":\"{{customerID}}\",\r\n      \"attributes\":{\r\n         \"email\":\"sb_11509457689@test.ua\",\r\n         \"password\":\"Password\"\r\n      }\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/activation",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"activation"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTCheckout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6266f1e8-d08d-4740-85a4-bc9f5577948e",
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable (\"checkoutSecurityId\", jsonDataResponse.data.attributes.checkoutSecurityId);",
+							"    postman.setEnvironmentVariable (\"checkoutTotalAmount\", jsonDataResponse.data.attributes.basket.attributes.totals.attributes.totalValue.amount);",
+							"    "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "http://{{apiEnv}}1/baskets/BQUK/{{basketID}}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETCheckout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETCarrier",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					},
+					{
+						"key": "",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}1/carrier/BQUK/fulfilmentGroups/{{fulfilmentGroup1}}",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"carrier",
+						"BQUK",
+						"fulfilmentGroups",
+						"{{fulfilmentGroup1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTFulfilmentGroup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "45721c8f-6773-4270-b60f-19589589c096",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"fulfilmentGroup1\", jsonDataResponse.data[0].id);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n                                  \"data\" : {\r\n                                    \"attributes\" : {\r\n                                      \"honorificPrefix\" : \"Mr\",\r\n                                      \"givenName\" : \"Chuck\",\r\n                                      \"familyName\" : \"Norris\",\r\n                                      \"companyName\" : \"Epam\",\r\n                                      \"phoneNumber\" : \"+4400000000\",\r\n                                      \"mobileNumber\" : \"07123123123\",\r\n                                      \"rawAddress\" : {\r\n                                        \"houseName\" : \"Fizkultury\",\r\n                                        \"houseNumber\" : \"28\",\r\n                                        \"addressLine1\" : \"someAddressLine1\",\r\n                                        \"addressLine2\" : \"SomeAddressLine2\",\r\n                                        \"city\" : \"Kyiv\",\r\n                                        \"county\" : \"Ua\",\r\n                                        \"country\" : \"GB\",\r\n                                        \"postalCode\" : \"CM0 7AA\"\r\n                                      }\r\n                                    }\r\n                                  } }"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}/fulfilmentGroups",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"fulfilmentGroups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHFulfilmentGroup",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"data\": {\r\n     \"type\" : \"fulfilmentGroupUpdate\",\r\n     \"id\" : \"{{fulfilmentGroup1}}\",\r\n     \"attributes\" : {\r\n      \"deliveryDate\": {\r\n         \"type\" : \"availableDate\",\r\n         \"id\": \"{{fulfilmentGroup1}}}\",\r\n         \"attributes\" : {\r\n             \"date\" : \"{{date}}\"\r\n         }\r\n      },\r\n      \"hmac\": \"{{hmac}}\"\r\n  }\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}/fulfilmentGroups/{{fulfilmentGroup1}}",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"fulfilmentGroups",
+						"{{fulfilmentGroup1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETFulfilmentGroup",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}/checkout/BQUK/{{basketID}}/fulfilmentGroups/{{fulfilmentGroup1}}",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"fulfilmentGroups",
+						"{{fulfilmentGroup1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHFulfilmentGroup Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"data\": {\r\n     \"type\" : \"fulfilmentGroupUpdate\",\r\n     \"id\" : \"{{fulfilmentGroup1}}\",\r\n     \"attributes\" : {\r\n      \"deliveryDate\": {\r\n         \"type\" : \"availableDate\",\r\n         \"id\": \"{{fulfilmentGroup1}}}\",\r\n         \"attributes\" : {\r\n             \"date\" : \"{{date}}\"\r\n         }\r\n      },\r\n      \"hmac\": \"{{hmac}}\"\r\n  }\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/checkout/BQUK/{{basketID}}/fulfilmentGroups/{{fulfilmentGroup1}}",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"fulfilmentGroups",
+						"{{fulfilmentGroup1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTVerifoneSession",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"sessionguid\", jsonDataResponse.data.attributes.sessionguid);\r",
+							"   postman.setEnvironmentVariable (\"sessionpasscode\", jsonDataResponse.data.attributes.sessionpasscode);\r",
+							"   postman.setEnvironmentVariable (\"processingDb\", jsonDataResponse.data.attributes.processingDb);\r",
+							"      postman.setEnvironmentVariable (\"cardDetailsSubmitUrl\", jsonDataResponse.data.attributes.cardDetailsSubmitUrl);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\" : {\r\n        \"returnUrl\" : \"http://url\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/payments/BQUK/checkout/{{basketID}}/generateVerifoneSession",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"payments",
+						"BQUK",
+						"checkout",
+						"{{basketID}}",
+						"generateVerifoneSession"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Card Details",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "sessionguid={{sessionguid}}&sessionpasscode={{sessionpasscode}}&processingdb={{processingDb}}&address1=someAddressLine1&cardtype=Master&pan=5442427496344094&startmonth=&startyear=&expirymonth=01&expiryyear=31&cardholdername=Master Testcard&issuenumber=&csc=111&country=GB&use-delivery-address=on&address=someAddressLine1&house-number=28&address2=someAddressLine1&address3=SomeAddressLine2&town=Kyiv&county=Ua&postcode=CM0 7AA&manualAddressInput=false"
+				},
+				"url": {
+					"raw": "{{cardDetailsSubmitUrl}}",
+					"host": [
+						"{{cardDetailsSubmitUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Card Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"cardType\", jsonDataResponse.data.attributes.cardType);\r",
+							"        postman.setEnvironmentVariable (\"token\", jsonDataResponse.data.attributes.token);\r",
+							"   postman.setEnvironmentVariable (\"cardNumberHash\", jsonDataResponse.data.attributes.cardNumberHash);\r",
+							"   postman.setEnvironmentVariable (\"mkCardSchemeId\", jsonDataResponse.data.attributes.mkCardSchemeId);\r",
+							"      postman.setEnvironmentVariable (\"number\", jsonDataResponse.data.attributes.number);\r",
+							"            postman.setEnvironmentVariable (\"name\", jsonDataResponse.data.attributes.name);\r",
+							"            postman.setEnvironmentVariable (\"expiryMonth\", jsonDataResponse.data.attributes.expiryMonth);\r",
+							"               postman.setEnvironmentVariable (\"expiryYear\", jsonDataResponse.data.attributes.expiryYear);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}1/payments/BQUK/checkout/{{basketID}}/getCardDetails?processingDb={{processingDb}}&sessionGuid={{sessionguid}}",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"payments",
+						"BQUK",
+						"checkout",
+						"{{basketID}}",
+						"getCardDetails"
+					],
+					"query": [
+						{
+							"key": "processingDb",
+							"value": "{{processingDb}}"
+						},
+						{
+							"key": "sessionGuid",
+							"value": "{{sessionguid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gift Card validateAndCheckBalance Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"data\": {\r\n \"type\":\"giftCardRequestObject\",\r\n  \"attributes\":{\r\n    \"cardNumber\":\"1234567890123456789\",\r\n    \"pin\":\"0151\"\r\n  }\r\n }\r\n }"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/giftcard/BQUK/validateAndCheckBalance",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"giftcard",
+						"BQUK",
+						"validateAndCheckBalance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTPaymentGroup",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"meta\": {\n    \"profile\": \"string\"\n  },\n  \"data\": {\n    \"type\": \"paymentGroup\",\n    \"id\": \"string\",\n    \"attributes\": {\n      \"value\": {\n        \"amount\": \"{{checkoutTotalAmount}}\",\n        \"currencyCode\": \"GBP\"\n      },\n      \"paymentSource\" : \"Online\",\n                        \"paymentMethod\": \"CARD\",\n      \"cardPayment\": {\n        \"amountAuthorised\": {\n          \"amount\": \"25.00\",\n          \"currencyCode\": \"GBP\"\n        },\n        \n        \"cardPayment\": {\n          \"attributes\": {\n            \"cardType\": \"{{cardType}}\",\n            \"number\": \"{{number}}\",\n            \"name\": \"{{name}}\",\n            \"nickName\": \"\",\n            \"expiryMonth\": \"{{expiryMonth}}\",\n            \"expiryYear\": \"20{{expiryYear}}\",\n            \"token\": \"{{token}}\",\n            \"mkCardSchemeId\": \"{{mkCardSchemeId}}.0\",\n            \"cardNumberHash\": \"{{cardNumberHash}}\",\n            \"billingAddress\": {\n              \"type\": \"contactInfo\",\n              \"attributes\": {\n                  \"contactDetails\": {\n                    \"meta\": {},\n                    \"data\": {\n                      \"attributes\": {\n                        \"honorificPrefix\": \"Mr\",\n                        \"givenName\": \"Some, Name\",\n                        \"familyName\": \"Some, Surname\",\n                        \"companyName\": \"someCompany\",\n                        \"phoneNumber\": \"0770077006\",\n                        \"mobileNumber\": \"07777777777\",\n                        \"rawAddress\": {\n                          \"houseName\": \"someHouseName\",\n                          \"houseNumber\": \"123,456\",\n                          \"addressLine1\": \"someFirstAddress\",\n                          \"addressLine2\": \"someSecondAddress\",\n                          \"addressLine3\": \"someThirdAddress\",\n                          \"citySubDivision\": \"someSubDivision\",\n                          \"city\": \"Yeovil\",\n                          \"county\": \"some, County\",\n                          \"country\": \"GB\",\n                          \"postalCode\": \"B75 5LR\"\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            },\n            \"type\": \"paymentCard\"\n          }\n        }\n      }\n    }\n  }"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}/payments",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTPaymentGroup PayPal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"data\": {\r\n    \"type\": \"paymentGroup\",\r\n    \"attributes\": {\r\n      \"value\": {\r\n        \"amount\": \"{{checkoutTotalAmount}}\",\r\n        \"currencyCode\": \"GBP\"\r\n      },\r\n  \"paymentSource\" : \"Online\",\r\n  \"paymentMethod\": \"PAYPAL\",\r\n     \"unifiedPayment\": {\r\n   \"type\": \"unifiedPayment\",\r\n         \"attributes\": {\r\n    \"transactionId\": \"happy{{$timestamp}}\"\r\n         }\r\n        }\r\n      }\r\n    }\r\n}\r\n\r\n\r\n"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}/payments",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTPaymentGroup UNIFIED",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7a76faa9-43ec-493e-b339-19b1bda7ef64",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"type\": \"paymentGroup\",\r\n        \"attributes\": {\r\n            \"value\": {\r\n                \"amount\": \"{{checkoutTotalAmount}}\",\r\n                \"currencyCode\": \"GBP\"\r\n            },\r\n            \"paymentSource\": \"Online\",\r\n            \"paymentMethod\": \"UNIFIED_CARD\",\r\n            \"unifiedPayment\": {\r\n                \"type\": \"unifiedPayment\",\r\n                \"attributes\": {\r\n                    \"transactionId\": \"chargeWithoutRedirect1554124532754\",\r\n                    \"unifiedPaymentCard\": {\r\n                        \"type\": \"unifiedPaymentCard\",\r\n                        \"attributes\": {\r\n                            \"cardScheme\": \"VISA\",\r\n                            \"holderName\": \"card holder\",\r\n                            \"number\": \"55 *** 4444\",\r\n                            \"expiryMonth\": \"12\",\r\n                            \"expiryYear\": \"2022\"\r\n                        }\r\n                    },\r\n                    \"billingAddress\": {\r\n                        \"type\": \"contactInfo\",\r\n                        \"attributes\": {\r\n                            \"contactDetails\": {\r\n                                \"data\": {\r\n         \"attributes\": {\r\n                      \"honorificPrefix\": \"Mr\",\r\n                      \"givenName\": \"Chuck12345678901234567890123456789012345\",\r\n                      \"familyName\": \"Norris123456789012345678901234567890234\",\r\n                      \"companyName\": \"Epam123456789012345678901234567890123456\",\r\n                      \"phoneNumber\": \"+(44)9999900000000\",\r\n                      \"mobileNumber\": \"07123123123\",\r\n                      \"rawAddress\": {\r\n                          \"houseName\": \"Fizkultury123456789012345678901234567890\",\r\n                          \"houseNumber\": \"1234567890\",\r\n                          \"addressLine1\": \"someAddressLine11234567890123456789012341\",\r\n                          \"addressLine2\": \"someAddressLine11234567890123456789012341\",\r\n                          \"city\": \"Kyiv123456789012345678901234567890123456\",\r\n                          \"county\": \"West MidlandsWest MidlandsWest Midlandsv\",\r\n                          \"country\": \"GB\",\r\n                          \"postalCode\": \"CM0 7AA\"\r\n                      }\r\n                                    }\r\n                                }\r\n                            }\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}/payments",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTPaymentGroupGiftCard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\":{\r\n      \"type\":\"paymentGroup\",\r\n      \"attributes\":{\r\n         \"value\":{\r\n            \"amount\":\"{{checkoutTotalAmount}}\",\r\n            \"currencyCode\":\"GBP\"\r\n         },\r\n    \"paymentSource\": \"Online\",\r\n         \"paymentMethod\":\"GIFT_CARD\",\r\n         \"giftCardPayment\":{\r\n            \"type\":\"giftCardDetails\",\r\n            \"attributes\":{\r\n               \"cardNumber\":\"5045075668999904000\",\r\n               \"pin\":\"0151\"\r\n            }\r\n         }\r\n      }\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}/payments",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETPaymentGroups",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "46277435-2e59-4df0-be79-ca91eb640427",
+						"exec": [
+							"",
+							"",
+							"var jsonDataResponse = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable (\"payGroupId\", jsonDataResponse[0].data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}/payments",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETEPaymentGroup",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\r\n    \"type\": \"paymentGroup\",\r\n    \"id\": \"{{payGroupId}}\"\r\n  }\r\n]"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}/payments",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3DSEnrollCheck",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"threeDSCheckKey\", jsonDataResponse.data.attributes.threeDSCheckKey);\r",
+							"    postman.setEnvironmentVariable (\"processingDb\", jsonDataResponse.data.attributes.processingDb);\r",
+							"    postman.setEnvironmentVariable (\"payerAuthRequestId\", jsonDataResponse.data.attributes.payerAuthRequestId); "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}1/payments/BQUK/checkout/{{basketID}}/3DSEnrollCheck",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"payments",
+						"BQUK",
+						"checkout",
+						"{{basketID}}",
+						"3DSEnrollCheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3DSEnrollCheck session based",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"threeDSCheckKey\", jsonDataResponse.data.attributes.threeDSCheckKey);\r",
+							"    postman.setEnvironmentVariable (\"processingDb\", jsonDataResponse.data.attributes.processingDb);\r",
+							"    postman.setEnvironmentVariable (\"payerAuthRequestId\", jsonDataResponse.data.attributes.payerAuthRequestId); "
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}1/payments/BQUK/checkout/{{basketID}}/3DSEnrollCheck?sessionGuid={{sessionguid}}&processingDb={{processingDb}}",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"payments",
+						"BQUK",
+						"checkout",
+						"{{basketID}}",
+						"3DSEnrollCheck"
+					],
+					"query": [
+						{
+							"key": "sessionGuid",
+							"value": "{{sessionguid}}"
+						},
+						{
+							"key": "processingDb",
+							"value": "{{processingDb}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTSalesOrder",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"data\":{\r\n\"type\": \"salesOrderRequestObject\",\r\n  \"attributes\": {\r\n   \"checkoutId\": \"{{basketID}}\",\r\n   \"processingDB\":\"{{processingDb}}\",\r\n   \"payerAuthRequestId\": \"{{payerAuthRequestId}}\",\r\n   \"threeDSCheckKey\": \"{{threeDSCheckKey}}\"\r\n  }\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/salesorder/BQUK",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"salesorder",
+						"BQUK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTSalesOrder Optile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"data\":{\r\n\"type\": \"salesOrderRequestObject\",\r\n  \"attributes\": {\r\n   \"checkoutId\": \"{{basketID}}\"\r\n  }\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/salesorder/BQUK",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"salesorder",
+						"BQUK"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Sales Order",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}",
+						"disabled": true
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/salesorder/BQUK/{{salesOrderId}}",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"salesorder",
+						"BQUK",
+						"{{salesOrderId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTSavedList",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n\"data\": {\r\n\"type\": \"savedListCreateOrUpdate\", \r\n\"attributes\": {\r\n\"customerId\": \"{{customerID}}\",\r\n\"quantity\": 1,\r\n\"ean\": \"0088381678964\"\r\n}\r\n}\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/wishlists/BQUK/savedList",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"wishlists",
+						"BQUK",
+						"savedList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSavedList",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}2/customers/CAFR/{{customerID}}/savedList",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"CAFR",
+						"{{customerID}}",
+						"savedList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHBatchLinesInSavedList",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{apiEnv}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\":[\r\n      {\r\n         \"data\":{\r\n         \"id\": \"gi380001\",\r\n            \"type\":\"singleSavedListItemUpdate\",\r\n            \"attributes\":{\r\n               \"quantity\": \"1\"\r\n            }\r\n         }\r\n      },\r\n     {\r\n         \"data\":{\r\n         \"id\": \"gi380001\",\r\n            \"type\":\"singleSavedListItemUpdate\",\r\n            \"attributes\":{\r\n               \"quantity\": \"1\"\r\n            }\r\n         }\r\n      },\r\n      {\r\n         \"data\":{\r\n         \"id\": \"gi380001\",\r\n            \"type\":\"singleSavedListItemUpdate\",\r\n            \"attributes\":{\r\n               \"quantity\": \"1\"\r\n            }\r\n         }\r\n      }\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/wishlists/BQUK/relationships/batch/savedListLines",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"wishlists",
+						"BQUK",
+						"relationships",
+						"batch",
+						"savedListLines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETESavedListLine",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\r\n   \"type\": \"savedListLineItem\",\r\n    \"id\": \"{{gift-item1}}\"\r\n},{\r\n   \"type\": \"savedListLineItem\",\r\n    \"id\": \"{{gift-item2}}\"\r\n}]"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/wishlists/BQUK/savedList/relationships/lines",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"wishlists",
+						"BQUK",
+						"savedList",
+						"relationships",
+						"lines"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETPaymentOptions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/payments/BQUK/checkout/{{basketID}}/paymentOptions",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"payments",
+						"BQUK",
+						"checkout",
+						"{{basketID}}",
+						"paymentOptions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTMainAddress",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "032c9847-e679-43ae-aeb4-081850cc874f",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"mainAddressID\", jsonDataResponse.data.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\"type\" : \"contactInfo\",\r\n  \"attributes\": {\r\n      \"contactDetails\" : {\r\n        \"meta\" : { },\r\n        \"data\" : {\r\n          \"attributes\" : {\r\n            \"honorificPrefix\" : \"Mr\",\r\n            \"givenName\" : \"Chuck12345678901234567890123456789012345\",\r\n            \"familyName\" : \"Norris1234567890123456789012345678902345\",\r\n            \"companyName\" : \"Epam123456789012345678901234567890123456\",\r\n            \"phoneNumber\" : \"+4400000000\",\r\n            \"mobileNumber\" : \"07111111111\",\r\n            \"rawAddress\" : {\r\n              \"houseName\" : \"Fizkultury123456789012345678901234567890\",\r\n              \"houseNumber\" : \"1234567890\",\r\n              \"addressLine1\" : \"someAddressLine1123456789012345678901234\",\r\n              \"addressLine2\" : \"SomeAddressLine2123456789012345678901234\",\r\n              \"city\" : \"Kyiv123456789012345678901234567890123456\",\r\n              \"county\" : \"Ua\",\r\n              \"country\" : \"GB\",\r\n              \"postalCode\" : \"CM0 7AA\"\r\n            }\r\n          }\r\n        }\r\n      }\r\n  }\r\n} "
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/{{customerID}}/mainAddress",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"mainAddress"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETMainAddress",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/{{customerID}}/mainAddress",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"mainAddress"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHMainAddress",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n              \"data\": {\r\n                  \"id\": \"{{mainAddressID}}\",\r\n                  \"type\": \"contactInfoUpdate\",\r\n                 \"attributes\" : {\r\n            \"honorificPrefix\" : \"Mr\",\r\n            \"givenName\" : \"Chuck12345678901234567890123456789012345\",\r\n            \"familyName\" : \"Norris123456789012345678901234567890234\",\r\n            \"companyName\" : \"Epam123456789012345678901234567890123456\",\r\n            \"phoneNumber\" : \"+4400000000\",\r\n            \"mobileNumber\" : \"07111111111\",\r\n            \"rawAddress\" : {\r\n              \"houseName\" : \"Fizkultury123456789012345678901234567890\",\r\n              \"houseNumber\" : \"1234567890\",\r\n              \"addressLine1\" : \"someAddressLine1123456789012345678901234\",\r\n              \"addressLine2\" : \"SomeAddressLine2123456789012345678901234\",\r\n              \"city\" : \"Kyiv123456789012345678901234567890123456\",\r\n              \"county\" : \"Ua\",\r\n              \"country\" : \"GB\",\r\n              \"postalCode\" : \"CM0 7AA\"\r\n            }\r\n                  }\r\n              }\r\n          }"
+				},
+				"url": {
+					"raw": "{{apiEnv}}2/customers/BQUK/{{customerID}}/mainAddress",
+					"host": [
+						"{{apiEnv}}2"
+					],
+					"path": [
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"mainAddress"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHCheckout",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"data\": {\r\n        \"attributes\": {\r\n            \"phoneNumber\": \"+(123)123 123 123\",\r\n            \"mobileNumber\" : \"07888888888\",\r\n            \"reference\": \"test\"\r\n        },\r\n        \"id\": \"{{basketID}}\",\r\n        \"type\": \"checkout\"\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}1/checkout/BQUK/{{basketID}}",
+					"host": [
+						"{{apiEnv}}1"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MERGEBaskets",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\":{\r\n      \"type\":\"basketMergeDetails\",\r\n      \"attributes\":{\r\n         \"originBasketId\":\"{{%anonBasketId%}}\",\r\n         \"originProfileId\":\"{{%anonCustomerId%}}\",\r\n         \"basketAction\":\"Copy\"\r\n      }\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}groupapi/v1/baskets/BQUK/merge/{{%anon2BasketId%}}",
+					"host": [
+						"{{apiEnv}}groupapi"
+					],
+					"path": [
+						"v1",
+						"baskets",
+						"BQUK",
+						"merge",
+						"{{%anon2BasketId%}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTShippingAddress",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\"type\" : \"contactInfo\",\r\n  \"attributes\": {\r\n      \"contactDetails\" : {\r\n        \"meta\" : { },\r\n        \"data\" : {\r\n          \"attributes\" : {\r\n            \"honorificPrefix\" : \"Mr\",\r\n            \"givenName\" : \"Chuck12345678901234567890123456789012345\",\r\n            \"familyName\" : \"Norris123456789012345678901234567890234\",\r\n            \"companyName\" : \"Epam123456789012345678901234567890123456\",\r\n            \"phoneNumber\" : \"+4400000000\",\r\n            \"mobileNumber\" : \"07123123123\",\r\n            \"rawAddress\" : {\r\n              \"houseName\" : \"Fizkultury123456789012345678901234567890\",\r\n              \"houseNumber\" : \"1234567890\",\r\n              \"addressLine1\" : \"someAddressLine1123456789012345678901234\",\r\n              \"addressLine2\" : \"SomeAddressLine2123456789012345678901234\",\r\n              \"city\" : \"Kyiv123456789012345678901234567890123456\",\r\n              \"county\" : \"Ua\",\r\n              \"country\" : \"GB\",\r\n              \"postalCode\" : \"CM0 7AA\"\r\n            }\r\n          }\r\n        }\r\n      }\r\n  }\r\n} "
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/customers/BQUK/{{customerID}}/shippingAddresses",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"shippingAddresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETShippingAddress",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/customers/BQUK/{{customerID}}/shippingAddresses",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"shippingAddresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETPaymentCards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/customers/BQUK/{{customerID}}/paymentCards",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"paymentCards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTPaymentCard",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"type\": \"paymentCard\",\r\n  \"attributes\": {\r\n    \"cardType\": \"{{cardType}}\",\r\n    \"expiryMonth\": \"{{expiryMonth}}\",\r\n    \"expiryYear\": \"20{{expiryYear}}\",\r\n    \"name\": \"{{name}}\",\r\n    \"number\": \"{{number}}\",\r\n    \"token\": \"{{token}}\",\r\n    \"tokenProvider\": \"worldPay\",\r\n                \"mkCardSchemeId\": \"{{mkCardSchemeId}}.0\",\r\n    \"cardNumberHash\": \"{{cardNumberHash}}\",\r\n    \"billingAddress\": {\r\n                        \"type\": \"contactInfo\",\r\n      \"attributes\": {\r\n                            \"contactDetails\": {\r\n                              \"data\": {\r\n                                \"attributes\": {\r\n                                \"honorificPrefix\": \"Mr\",\r\n                    \"givenName\": \"Ńíḱ,íta\",\r\n              \"familyName\": \"śḱú,ŕátov\",\r\n                                \"companyName\": \"ŴǄǼéßËÄÜ12-.,'SomeCompany\",\r\n                                \"phoneNumber\": \"+1 (234) 123123\",\r\n                                \"mobileNumber\": \"07123456789\",\r\n        \"rawAddress\": {\r\n          \"addressLine1\": \"êèÔµFirst Line 1\",\r\n          \"addressLine2\": \"ßà'#First Line 2\",\r\n          \"addressLine3\": \"é&.,*First Line 3\",\r\n          \"city\": \"Yeovil\",\r\n          \"citySubDivision\": \"Sub Division Here\",\r\n          \"country\": \"GB\",\r\n          \"county\": \"West, Islands\",\r\n          \"houseNumber\": \".'a,1/\",\r\n                                        \"houseName\": \"Baker\",\r\n          \"postalCode\": \"BA21 5HR\"\r\n                                        }\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n}\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/customers/BQUK/{{customerID}}/paymentCards",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"paymentCards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETEShippingAddresses",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n  \"data\" : [\r\n   {\r\n    \"type\": \"shippingAddress\",\r\n    \"id\": \"125981260\"\r\n   },\r\n   {\r\n    \"type\": \"shippingAddress\",\r\n    \"id\": \"125981261\"\r\n   }\r\n ]\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/customers/BQUK/{{customerID}}/relationships/shippingAddresses",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"relationships",
+						"shippingAddresses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHPaymentCard",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"data\":{\r\n      \"id\":\"{{payCard}}\",\r\n      \"type\":\"paymentCardUpdate\",\r\n      \"attributes\":{\r\n         \"billingAddress\":{\r\n\"type\" : \"contactInfo\",\r\n  \"attributes\": {\r\n          \"contactDetails\" : {\r\n            \"meta\" : { },\r\n            \"data\" : {\r\n              \"attributes\" : {\r\n                \"honorificPrefix\" : \"Mr\",\r\n                \"givenName\" : \"Chuck12345678901234567890123456789012345\",\r\n                \"familyName\" : \"Norris123456789012345678901234567890234\",\r\n                \"companyName\" : \"Epam123456789012345678901234567890123456\",\r\n                \"phoneNumber\" : \"+4400000000\",\r\n                \"mobileNumber\" : \"07123123123\",\r\n                \"rawAddress\" : {\r\n                  \"houseName\" : \"Fizkultury123456789012345678901234567890\",\r\n                  \"houseNumber\" : \"1234567890\",\r\n                  \"addressLine1\" : \"someAddressLine1123456789012345678901234\",\r\n                  \"addressLine2\" : \"SomeAddressLine2123456789012345678901234\",\r\n                  \"city\" : \"Kyiv123456789012345678901234567890123456\",\r\n                  \"county\" : \"Ua\",\r\n                  \"country\" : \"GB\",\r\n                  \"postalCode\" : \"CM0 7AA\"\r\n                }\r\n              }\r\n            }\r\n          }\r\n  }\r\n\r\n         }\r\n      }\r\n   }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/customers/BQUK/{{customerID}}/paymentCards/{{payCard}}",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"customers",
+						"BQUK",
+						"{{customerID}}",
+						"paymentCards",
+						"{{payCard}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POSTPaymentGroup PayPal Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					},
+					{
+						"key": "checkoutSecurityId",
+						"value": "{{checkoutSecurityId}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"meta\": {\r\n    \"profile\": \"string\"\r\n  },\r\n  \"data\": {\r\n    \"type\": \"paymentGroup\",\r\n    \"id\": \"string\",\r\n    \"attributes\": {\r\n      \"value\": {\r\n        \"amount\": \"{{checkoutTotalAmount}}\",\r\n        \"currencyCode\": \"GBP\"\r\n      },\r\n  \"paymentSource\" : \"Online\",\r\n  \"paymentMethod\": \"PAYPAL\",\r\n     \"unifiedPayment\": {\r\n   \"type\": \"unifiedPayment\",\r\n         \"attributes\": {\r\n    \"transactionId\": \"{{listId}}\"\r\n         }\r\n        }\r\n      }\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/checkout/BQUK/{{basketID}}/payments",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"checkout",
+						"BQUK",
+						"{{basketID}}",
+						"payments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "customerResources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"customerID\", jsonDataResponse.data.attributes.profileId);\r",
+							"var jsonDataResponse = JSON.parse(responseBody);\r",
+							"    postman.setEnvironmentVariable (\"basketID\", jsonDataResponse.data.attributes.basketId);\r",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/customers/BQUK/customerResources",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"customers",
+						"BQUK",
+						"customerResources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PatchPrefferedStore",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.api+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"data\" : {\r\n  \"id\": \"0767\",\r\n  \"type\":\"store\"\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/baskets/BQUK/{{basketID}}/relationships/store",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"baskets",
+						"BQUK",
+						"{{basketID}}",
+						"relationships",
+						"store"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PATCHCustomer",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "{{conType}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"data\":{\r\n  \"id\":\"{{customerID}}\",\r\n  \"type\":\"customerUpdate\",\r\n  \"attributes\":{\r\n        \"phoneNumber\": \"123456789\"  \r\n    }\r\n }\r\n}"
+				},
+				"url": {
+					"raw": "{{apiEnv}}/groupapi/v1/customers/BQUK/{{customerID}}",
+					"host": [
+						"{{apiEnv}}"
+					],
+					"path": [
+						"groupapi",
+						"v1",
+						"customers",
+						"BQUK",
+						"{{customerID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GETAssemblyInfo",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{apiEnvDirect}}1/utils/assemblyInfo",
+					"host": [
+						"{{apiEnvDirect}}1"
+					],
+					"path": [
+						"utils",
+						"assemblyInfo"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
